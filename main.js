@@ -1,6 +1,36 @@
 
 const generatorBtn = document.getElementById("generator-btn");
 const lottoSetsContainer = document.getElementById("lotto-sets-container");
+const themeSwitch = document.getElementById("checkbox");
+
+// Function to set the theme
+function setTheme(isDark) {
+  if (isDark) {
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("theme", "dark");
+    themeSwitch.checked = true;
+  } else {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+    themeSwitch.checked = false;
+  }
+}
+
+// Event listener for the theme switch
+themeSwitch.addEventListener("change", (e) => {
+  setTheme(e.target.checked);
+});
+
+// Check for saved theme preference on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    setTheme(true);
+  } else {
+    setTheme(false);
+  }
+});
+
 
 generatorBtn.addEventListener("click", () => {
   lottoSetsContainer.innerHTML = ""; // Clear previous sets
